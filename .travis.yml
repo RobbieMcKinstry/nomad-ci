@@ -18,5 +18,7 @@ before_install:
 
 script:
     - nohup sudo consul agent -dev -bind=0.0.0.0 &
+    - sleep 10
     - nohup sudo nomad  agent -dev -bind=0.0.0.0 &
+    - sleep 10
     - nomad server-members
