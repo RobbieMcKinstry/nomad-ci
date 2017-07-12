@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x
 
 VAULT_VERSION="0.7.0"
 CURDIR=`pwd`
