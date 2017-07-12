@@ -1,0 +1,21 @@
+sudo: required
+dist: trusty
+
+services:
+        - docker
+
+language: go
+
+go:
+    - master
+
+before_install:
+    - sudo apt-get update
+    - sudo apt-get install -y liblxc1 lxc-dev lxc
+    - ./.deploy/install_consul.sh
+    - ./.deploy/install_vault.sh
+    - ./.deploy/install_nomad.sh
+
+script:
+    - nohup nomad agent -dev
+    - nomad 
