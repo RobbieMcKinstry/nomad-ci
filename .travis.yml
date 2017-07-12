@@ -17,6 +17,6 @@ before_install:
     - ./.deploy/install_nomad.sh
 
 script:
-    - nohup consul agent -dev &
-    - nohup nomad  agent -dev &
+    - nohup sudo consul agent -dev -bind=0.0.0.0 &
+    - nohup sudo nomad  agent -dev -bind=0.0.0.0 &
     - nomad server-members
