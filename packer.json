@@ -1,0 +1,30 @@
+{
+    "variables": {
+        "javadeps": "/opt/javadeps"
+    },
+
+    "builders": [{
+        "type": "docker",
+        "image": "openjdk:8-jdk",
+        "commit": true
+    }],
+
+    "provisioners": [{
+        "type": "shell",
+        "inline": ["mkdir -p {{user `javadeps`}}"]
+    }, {
+        "type": "shell",
+        "scripts": ["install_findbugs.bash", "install_checkstyle.bash"],
+        "environment_vars": ["DESTINATION={{user `javadeps`}}"]
+    }],
+
+    "post-processors": [
+        [{
+            "type": "docker-tag",
+            "repository": "thesnowmancometh/java-static-tools",
+            "tag": "0.1.0"
+        },
+        "docker-push"
+        ]
+    ]
+}
